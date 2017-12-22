@@ -804,3 +804,66 @@ class Ch extends Base{
        пока в коллекции не освободится место для нового элемента.
      !! BlockingQueue изящно решает проблему передачи элементов, собранных одним потоком,
        для обработки в другой поток без явных хлопот о проблемах синхронизации.
+
+20. пакет java.util.concurrent.
+    /20/
+    1.Concurrent Collections
+        -CopyOnWrite коллекции
+            -CopyOnWriteArrayList<E>
+            -CopyOnWriteArraySet<E>
+        -Scalable Maps
+            -ConcurrentMap<K, V>
+            -ConcurrentHashMap<K, V>
+            -ConcurrentNavigableMap<K,V>
+            -ConcurrentSkipListMap<K, V>
+            -ConcurrentSkipListSet<E>
+    2.Queues
+        -Non-Blocking Queues
+            -ConcurrentLinkedQueue<E>
+            -ConcurrentLinkedDeque<E>
+        -Blocking Queues
+            -BlockingQueue<E>
+            -ArrayBlockingQueue<E>
+            -DelayQueue<E extends Delayed>
+            -LinkedBlockingQueue<E>
+            -PriorityBlockingQueue<E>
+            -SynchronousQueue<E>
+            -BlockingDeque<E>
+            -LinkedBlockingDeque<E>
+            -TransferQueue<E>
+            -LinkedTransferQueue<E>
+    3.Synchronize
+        -Semaphore
+        -CountDownLatch
+        -CyclicBarrier
+        -Exchanger<V>
+        -Phaser
+    4.Executor
+        -
+        -
+        -
+        -
+        -
+        -
+    5.Locks
+        -Condition
+        -Lock
+        -ReentrantLock
+        -ReadWriteLock
+        -ReentrantReadWriteLock
+        -ReentrantReadWriteLock.ReadLock
+        -ReentrantReadWriteLock.WriteLock
+        -LockSupport
+        -AbstractOwnableSynchronizer
+        -AbstractQueuedSynchronizer
+        -AbstractQueuedLongSynchronizer
+    6.Atomics
+        -AtomicBoolean, AtomicInteger, AtomicLong, AtomicIntegerArray, AtomicLongArray
+            **За счет использования CAS,
+              операции с этими классами работают быстрее, чем если синхронизироваться через synchronized/volatile.
+            **In computer science, compare-and-swap (CAS) is an atomic instruction used in multithreading to achieve synchronization.
+        -AtomicReference
+        -AtomicMarkableReference
+        -AtomicStampedReference
+        -AtomicReferenceArray
+        -tomicIntegerFieldUpdater, AtomicLongFieldUpdater,AtomicReferenceFieldUpdater
