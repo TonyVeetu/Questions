@@ -527,13 +527,26 @@ class Ch extends Base{
     Данная аннотация регистрирует сервлет в контексте приложения,
       это тоже самое что мы делали в web.xml.
 
-22. С какими модулями спринга работал?
+
+22. Есть две таблицы. Написать для Hibernate класс, на который будут мапиться данные из
+        таблицы book
+       table autor (id, fio) ; table book(id, title, author_id)
     /22/
 
-23. Как в спринге создать свой контроллер?
+++23. Как в спринге создать свой контроллер?
     /23/
+    DispatcherServlet (регистрируется в web.xml) отправляет запрос контроллерам для выполнения определённых функций.
+    Аннотация @Controller указывает, что конкретный класс является контроллером.
+    Аннотация @RequestMapping используется для мапинга (связывания) с URL.
+    #
+    @Controller
+    @RequestMapping("/hello")
+    public class HelloController {
+         @RequestMapping(method = RequestMethod.GET)
+         public String printHello(){ ...; }
+    }
 
-24. Суть MVC.
+++24.1 Суть MVC.
     /24/
     Паттерн Model — View — Controller (Модель — Вид — Контроллер) при помощи слабо связанных
      готовых компонентов.
@@ -543,15 +556,42 @@ class Ch extends Base{
     - View отвечает за отображение данных Модели — генерируя HTML, которые мы видим в своём браузере.
     - Controller обрабатывает запрос пользователя, создаёт соответствующую Модель и передаёт её для отображения в Вид.
 
+    24.2 Spring MVC - построен вокруг DispatcherServlet.
+       #
+                http request     http response
+                        0 |       | 5
+               ______   DispatcherServlet            ____
+            1 |          2 |         3 |               4 |
+    Handler Mapping     Controller-1   View Resolver    View
+     ( определяет           ...
+      Controller )        Controller-n
 
-25. Есть две таблицы. Написать для Hibernate класс, на который будут мапиться данные из
-таблицы book
-       table autor (id, fio) ; table book(id, title, author_id)
+!!!!!!!!!!
+    HandlerMapping, Controller и ViewResolver - части интерфейса
+            WebApplicationContext extends ApplicationContext, с некоторыми дополнительными особенностями,
+            необходимыми для создания web-приложений.
+!!!!!!!!!!!
+
+
+
+++25. С какими модулями спринга работал?
     /25/
+    spring-beans
+    spring-core
+    spring-context(Context) для поддержки класса ApplicationContext - загрузка ресурсов, инициализация контекста.
+    Существует еще:
+        Spring Expression Language
+        Spring JDBC
+        Spring ORM
+        Spring Data
+        Spring AOP
+        Spring Security
+        Spring Boot - огонь! # Spring Boot DevTools
+        и т.д.
 
-
-26. С какой версией спринга работал?
+++26. С какой версией спринга работал?
     /26/
+    4 я версия!
 
 ++27. Что такое Bean? Чем отличается от других объектов?
     /27/
@@ -565,8 +605,7 @@ class Ch extends Base{
     Для управления компонентами (Spring Beans), из которых состоит приложение, Spring Container использует Внедрение Зависимостей (DI).
     #   В Spring имеется 2 различных вида контейнеров:
         1. Spring BeanFactory Container;
-        2. Spring ApplicationContext Container - более продвинут, но тежелее по ресурсам!!!
-
+        2. Spring ApplicationContext Container - более продвинут, но тежелее по ресурсам!!! Его виды:
             – FileSystemXmlApplicationContext
             Загружает данные о бине из XML файла.
             При использовании этой реализации в конструкторе необходимо указать полный адрес конфигурационного файла.
@@ -581,17 +620,14 @@ class Ch extends Base{
             Эта реализация ApplicationContext получает необходимую информацию из веб-приложения.
 
 
-28. Какими способами можно объявить Bean в спринге?
+++28. Какими способами можно объявить Bean в спринге?
     /28/
         – XML
         – Аннотации Java
         – Java код
-
-
 !!!!
     Взаимосвязь между _IoC & DI_ такая же как _Agile & Scrum_
 !!!!
-
 ++29. В чём суть IoC - Inversion of control(инверсия управления)?
     /29/
     1. Это некий абстрактный принцип, набор рекомендаций для написания !! --> слабо связанного кода <-- !!
@@ -637,7 +673,7 @@ class Ch extends Base{
         # ex.examCheck() - в этом методе мы use Answer;
 !!!!!!!!!!!!!!!!!!!!!!!!
 
-??32. Есть два бина от одного интерфейса. Как конкретизировать, какой бин нужно инжектить?
+++32. Есть два бина от одного интерфейса. Как конкретизировать, какой бин нужно инжектить?
     /32/
     Для установки конкретного экземпляра необходимо использовать аннотацию @Qualifier.
     #Qualifier(id_bean) или дефолтовое имя bean'a;
