@@ -565,7 +565,7 @@ class Ch extends Base{
       это тоже самое что мы делали в web.xml.
 
 
-22. Есть две таблицы. Написать для Hibernate класс, на который будут мапиться данные из
+++22. Есть две таблицы. Написать для Hibernate класс, на который будут мапиться данные из
         таблицы book
        table author (id, fio) ; table book(id, title, author_id)
     /22/
@@ -575,34 +575,48 @@ class Ch extends Base{
     @JoinColumn
     @Temporal
 
+    *Для реализации отношения ManyToMany добавим таблицу author_book!
+
     @Entity
-    @Table(name="Book")
+    @Table(name="book")
     public class Book {
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         private long id;
 
         @Column(name="title",unique = true, nullable = false, length = 100)
         private String title;
 
-        @Column(name="author_id")
-        private String author_id;
+        @ManyToMany
+        @JoinTable(name = "author_book",
+        joinColumns = @JoinColumn(name = "book_id"),
+        inverseJoinColumns = @JoinColumn(name = "author_id"))
+        private Set<Author> authors;
+
     }
 
     @Entity
     @Table(name="author")
-    public class Book {
+    public class Author {
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         private long id;
 
         @Column(name="fio")
         private String FIO;
 
-        @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
+        @ManyToMany
+        @JoinTable(name = "author_book",
+        joinColumns = @JoinColumn(name = "author_id"),
+        inverseJoinColumns = @JoinColumn(name = "book_id"))
         private Set<Book> bookList;
     }
 
+!!!!!!!!!!!!!!!!!
+   -JavaBeans — классы в языке Java, написанные по определённым правилам.
+   -xml — маппинг является единственным способом связать
+        JavaBean с hibernato'm если нету возможности редактировать этот самый бин.
+!!!!!!!!!!!!!!!!
 
 ++23. Как в спринге создать свой контроллер?
     /23/
