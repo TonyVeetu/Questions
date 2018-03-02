@@ -249,8 +249,9 @@ class Ch extends Base{
 
 ++13. Что такое String, StringBuffer, StringBuilder?
     /13/
+    StringBuilder - шустрее, но потоконебезопасный!
     Класс String является immutable - Вы не можете модифицировать объект String,
-     но можете заменить его созданием нового экземпляра.
+        но можете заменить его созданием нового экземпляра.
     Создание нового экземпляра обходится дороговато.
     Плюсы:
         - использование строк в многопоточных средах (String является потокобезопасным (thread-safe) )
@@ -261,11 +262,11 @@ class Ch extends Base{
           System.out.println(String.join(delimiter, hello, habr)); -> "Hello, habrahabr"
 
     ** CharSequence - это (Interface) читаемая последовательность символов.
-    Этот интерфейс обеспечивает единообразный доступ только для чтения ко многим различным типам последовательностей символов.
-
+    Этот интерфейс обеспечивает единообразный доступ только для чтения
+        ко многим различным типам последовательностей символов.
 
     Класс StringBuffer представляет расширяемые и доступные для изменений последовательности символов,
-      позволяя вставлять символы и подстроки в существующую строку и в любом месте.
+        позволяя вставлять символы и подстроки в существующую строку и в любом месте.
     Данный класс гораздо экономичнее в плане потребления памяти.
     Класс StringBuffer является mutable - использовать StringBuffer или StringBuilder следует тогда,
       когда вы хотите модифицировать содержимое.
@@ -303,7 +304,8 @@ class Ch extends Base{
       с единственным общедоступным методом call().
     Метод call имеет дополнительную возможность возвращать результат,
       а также разрешено выдавать проверенные исключения.
-    Результат, полученный в результате задания задачи Callable , доступен для использования через будущее Future.
+    Результат, полученный в результате задания задачи Callable ,
+        доступен для использования через будущее Future.
     Future можно рассматривать как контейнер, который содержит результат вычисления Callable
         public interface Callable<V>{
             V call() throws Exception;
@@ -316,7 +318,8 @@ class Ch extends Base{
             boolean isDone();
         }
          ExecutorService es = Executors.newSingleThreadExecutor();
-         Future<String> result = es.submit(new ComplexCalculator());//ComplexCalculator implements Callable and return String!
+         Future<String> result = es.submit(new ComplexCalculator());
+                                //ComplexCalculator implements Callable and return String!
          System.out.println("Result of Complex Calculation is : " + result.get());
 
     Вычисление вызываемого может продолжаться в другом потоке,
