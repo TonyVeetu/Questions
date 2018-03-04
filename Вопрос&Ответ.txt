@@ -1087,13 +1087,8 @@
             **За счет использования CAS,
               операции с этими классами работают быстрее, чем если синхронизироваться через synchronized/volatile.
             **In computer science, compare-and-swap (CAS) is an atomic instruction used in multithreading to achieve synchronization.
-        -AtomicReference
-        -AtomicMarkableReference
-        -AtomicStampedReference
-        -AtomicReferenceArray
-        -tomicIntegerFieldUpdater, AtomicLongFieldUpdater,AtomicReferenceFieldUpdater
 
-21. Раскажи в чем суть wait(), notify(), notifiAll()?
+21. Раскажи в чем суть wait(), notify(), notifyAll()?
     Берется некий объект.
     Поток, который ждет выполнения каких-либо условий, вызывает у этого объекта метод wait, предварительно захватив его монитор.
     На этом его работа приостанавливается. И при вызове wait() монитор !!! ОТПУСКАЕТСЯ!!
