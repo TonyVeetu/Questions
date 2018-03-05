@@ -1422,3 +1422,37 @@
 ++23. Что такое this?
     this - это указатель на экземпляр класса в котором это слово написано.
 
+++24. Какие изменения в java 8?
+
+ 1. Методы интерфейсов по умолчанию #interface MyPerson{ "default!" String crazyHold(){return 7.4;}}
+ 2. Лямбда выражения - Collection.sort(names, (String a, String b) ->
+            { return b.compareTo(a);
+            )};// можно без {}!
+    где names - это List string'ов!
+ 3. @FunctionalInterface - has one abstract method!
+    Каждой лябмде соответствует тип представленный интерфейсом!
+ 4.1 Ссылки на методы - Integer::valueOf(передача ссылки на статический метод)
+                                                вместо Integer.valueOf(from);
+ 4.2 PersonFactory<P extends Person> {
+       P create(String firstName, LastName);
+    }
+     PersonFactory<Person> factory = Person::new;// Ссылки на конструктор! Person это класс
+     Person p = factory.create("Tony", "Masket");
+ 5. Появилояь много новых функциональных интерфейсов!
+    -Предикаты - Predicate
+    -Функции - Function
+    -Поставщики - Suppliers
+    -Потребители - Consumers
+    -Компараторы были но добавились новые методы по умолчанию.
+ 6. Потоки java.util.Stream и parallelSrtream
+        Добавились промежуточные и конечные операции.
+        Filter, Sorted, Map - промежуточные операции.
+ 7. Новое API работы с датами!
+ 8. Аннотации.
+    @interface Hints {
+        Hint[] value();
+    }
+    @Repeatable(Hint.class)
+    @interface Hint {
+        String value();
+    }
